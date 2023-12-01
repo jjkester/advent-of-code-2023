@@ -5,6 +5,7 @@ pluginManagement {
     }
 }
 
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -12,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "advent-of-code-2023"
+rootProject.name = "adventofcode23"
