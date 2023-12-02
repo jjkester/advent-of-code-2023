@@ -19,7 +19,9 @@ private val numbersMap = mapOf(
 /**
  * A map from the names of numbers from the specified range to their integer values.
  */
-fun numbersByName(range: IntRange): Map<String, Int> = numbersMap.filter { it.value in range }.also {
+fun numbersByName(
+    range: IntRange = numbersMap.values.min()..numbersMap.values.max()
+): Map<String, Int> = numbersMap.filter { it.value in range }.also {
     require(it.size == range.last - range.first + 1) {
         "Not all names of numbers in the given range are known"
     }
