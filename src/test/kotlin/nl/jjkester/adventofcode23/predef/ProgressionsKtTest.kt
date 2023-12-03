@@ -81,7 +81,8 @@ class ProgressionsKtTest {
             Arguments.of(1..0 step 10, 0),
             Arguments.of(10..-100 step 7, 0),
             Arguments.of(8 downTo 1, 8),
-            Arguments.of(100 downTo 10 step 10, 10)
+            Arguments.of(100 downTo 10 step 10, 10),
+            Arguments.of(1..1, 1)
         )
 
         @Suppress("EmptyRange")
@@ -92,7 +93,8 @@ class ProgressionsKtTest {
             Arguments.of(1u..0u step 10, 0),
             Arguments.of(100u..10u step 7, 0),
             Arguments.of(8u downTo 1u, 8),
-            Arguments.of(100u downTo 10u step 10, 10)
+            Arguments.of(100u downTo 10u step 10, 10),
+            Arguments.of(1u..1u, 1)
         )
 
         @Suppress("EmptyRange")
@@ -103,7 +105,8 @@ class ProgressionsKtTest {
             Arguments.of(1L..0L step 10, 0),
             Arguments.of(10L..-100L step 7, 0),
             Arguments.of(8L downTo 1L, 8),
-            Arguments.of(100L downTo 10L step 10, 10)
+            Arguments.of(100L downTo 10L step 10, 10),
+            Arguments.of(1L..1L, 1)
         )
 
         @Suppress("EmptyRange")
@@ -114,7 +117,8 @@ class ProgressionsKtTest {
             Arguments.of(1uL..0uL step 10, 0),
             Arguments.of(100uL..10uL step 7, 0),
             Arguments.of(8uL downTo 1uL, 8),
-            Arguments.of(100uL downTo 10uL step 10, 10)
+            Arguments.of(100uL downTo 10uL step 10, 10),
+            Arguments.of(1uL..1uL, 1)
         )
 
         @JvmStatic

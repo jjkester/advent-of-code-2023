@@ -1,5 +1,8 @@
+import info.solidsoft.gradle.pitest.PitestPluginExtension
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.pitest)
 }
 
 group = "nl.jjkester"
@@ -16,6 +19,12 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+configure<PitestPluginExtension> {
+    pitestVersion = "1.15.3"
+    junit5PluginVersion = "1.2.1"
+    outputFormats = setOf("HTML")
 }
 
 kotlin {

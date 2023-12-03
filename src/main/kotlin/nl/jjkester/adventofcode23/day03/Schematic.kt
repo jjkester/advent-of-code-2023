@@ -12,7 +12,7 @@ import org.jetbrains.kotlinx.multik.ndarray.operations.contains
  */
 class Schematic private constructor(
     private val data: D2Array<Int>
-) : D2AreaMap<Char>, Iterable<Pair<D2Coordinate, Char>> {
+) : AbstractD2Area(), D2AreaMap<Char>, Iterable<Pair<D2Coordinate, Char>> {
 
     override val x: IntRange = 0..<data.shape[0]
 

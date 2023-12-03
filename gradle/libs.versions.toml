@@ -4,6 +4,7 @@ kotlinx-multik = "0.2.2"
 test-junit = "5.10.1"
 test-assertk = "0.27.0"
 test-mockito = "5.2.1"
+test-pitest = "1.15.0"
 
 [libraries]
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
@@ -18,3 +19,4 @@ kotlinx-multik = ["kotlinx-multik-core", "kotlinx-multik-default"]
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+pitest = { id = "info.solidsoft.pitest", version.ref = "test-pitest" }

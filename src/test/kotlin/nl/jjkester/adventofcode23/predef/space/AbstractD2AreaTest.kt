@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class D2AreaTest {
+class AbstractD2AreaTest {
 
     @ParameterizedTest
     @MethodSource("areasForSize")
@@ -71,5 +71,5 @@ class D2AreaTest {
         )
     }
 
-    private class TestD2Area(override val x: IntRange, override val y: IntRange) : D2Area
+    private class TestD2Area(override val x: IntRange, override val y: IntRange) : AbstractD2Area()
 }

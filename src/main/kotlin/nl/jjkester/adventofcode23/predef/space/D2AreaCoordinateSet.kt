@@ -1,6 +1,6 @@
 package nl.jjkester.adventofcode23.predef.space
 
-private class D2AreaCoordinates(private val area: D2Area) : Set<D2Coordinate> {
+private class D2AreaCoordinateSet(private val area: D2Area) : Set<D2Coordinate> {
     override val size: Int
         get() = area.size
 
@@ -22,4 +22,4 @@ private class D2AreaCoordinates(private val area: D2Area) : Set<D2Coordinate> {
 /**
  * Returns a collection of the coordinates that are covered by this area.
  */
-fun D2Area.coordinates(): Set<D2Coordinate> = D2AreaCoordinates(this)
+fun D2Area.coordinates(): Set<D2Coordinate> = D2AreaCoordinateSet(this)

@@ -1,7 +1,5 @@
 package nl.jjkester.adventofcode23.predef.space
 
-import nl.jjkester.adventofcode23.predef.size
-
 /**
  * An area in a two-dimensional space.
  */
@@ -21,14 +19,13 @@ interface D2Area {
      * Size of the area.
      */
     val size: Int
-        get() = x.size * y.size
 
     /**
      * Returns whether this area is empty.
      *
      * @return Whether this area is empty.
      */
-    fun isEmpty(): Boolean = x.isEmpty() || y.isEmpty()
+    fun isEmpty(): Boolean
 
     /**
      * Returns whether the [x] and [y] coordinate is within the bounds of this area.
@@ -37,7 +34,7 @@ interface D2Area {
      * @param y Point on the y-axis.
      * @return Whether the [x] and [y] coordinate is within the bounds of this area.
      */
-    fun contains(x: Int, y: Int): Boolean = x in this.x && y in this.y
+    fun contains(x: Int, y: Int): Boolean
 }
 
 /**

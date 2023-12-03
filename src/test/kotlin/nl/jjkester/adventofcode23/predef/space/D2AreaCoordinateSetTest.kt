@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.kotlin.*
 import kotlin.random.Random
 
-class D2AreaCoordinatesTest {
+class D2AreaCoordinateSetTest {
 
     private val area: D2Area = mock()
 
