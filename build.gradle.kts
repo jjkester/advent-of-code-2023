@@ -7,8 +7,11 @@ version = "1.0-SNAPSHOT"
 
 dependencies {
     implementation(libs.kotlin.stdlib)
+    implementation(libs.bundles.kotlinx.multik)
+
     testImplementation(libs.junit)
     testImplementation(libs.assertk)
+    testImplementation(libs.mockito)
 }
 
 tasks.test {
