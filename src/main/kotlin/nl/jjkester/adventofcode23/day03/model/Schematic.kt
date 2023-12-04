@@ -1,4 +1,4 @@
-package nl.jjkester.adventofcode23.day03
+package nl.jjkester.adventofcode23.day03.model
 
 import nl.jjkester.adventofcode23.predef.space.*
 import org.jetbrains.kotlinx.multik.api.Multik

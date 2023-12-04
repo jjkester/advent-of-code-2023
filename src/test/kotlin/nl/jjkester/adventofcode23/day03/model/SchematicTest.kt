@@ -1,4 +1,4 @@
-package nl.jjkester.adventofcode23.day03
+package nl.jjkester.adventofcode23.day03.model
 
 import assertk.assertThat
 import assertk.assertions.containsExactly

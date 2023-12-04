@@ -1,5 +1,6 @@
 package nl.jjkester.adventofcode23.day03
 
+import nl.jjkester.adventofcode23.day03.model.Schematic
 import nl.jjkester.adventofcode23.execution.isDay
 
 /**

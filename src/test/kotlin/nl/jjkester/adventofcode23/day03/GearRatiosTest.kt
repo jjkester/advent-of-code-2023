@@ -2,6 +2,7 @@ package nl.jjkester.adventofcode23.day03
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import nl.jjkester.adventofcode23.day03.model.Schematic
 import org.junit.jupiter.api.Test
 
 class GearRatiosTest {
