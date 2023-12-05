@@ -1,6 +1,6 @@
 package nl.jjkester.adventofcode23.predef.space
 
-import nl.jjkester.adventofcode23.predef.size
+import nl.jjkester.adventofcode23.predef.ranges.size
 
 /**
  * Abstract implementation of [D2Area].

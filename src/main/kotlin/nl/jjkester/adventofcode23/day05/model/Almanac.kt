@@ -1,8 +1,6 @@
 package nl.jjkester.adventofcode23.day05.model
 
-import nl.jjkester.adventofcode23.predef.coerceIn
 import nl.jjkester.adventofcode23.predef.sections
-import nl.jjkester.adventofcode23.predef.size
 
 /**
  * An almanac with available seeds and instructions on how and where to plant them.
@@ -20,13 +18,13 @@ import nl.jjkester.adventofcode23.predef.size
 data class Almanac(
     val seeds: Set<Seed>,
     val seedRanges: Set<ClosedRange<Seed>>,
-    private val seedToSoil: RangeLookup<Seed, Soil>,
-    private val soilToFertilizer: RangeLookup<Soil, Fertilizer>,
-    private val fertilizerToWater: RangeLookup<Fertilizer, Water>,
-    private val waterToLight: RangeLookup<Water, Light>,
-    private val lightToTemperature: RangeLookup<Light, Temperature>,
-    private val temperatureToHumidity: RangeLookup<Temperature, Humidity>,
-    private val humidityToLocation: RangeLookup<Humidity, Location>
+    val seedToSoil: AlmanacStep<Seed, Soil>,
+    val soilToFertilizer: AlmanacStep<Soil, Fertilizer>,
+    val fertilizerToWater: AlmanacStep<Fertilizer, Water>,
+    val waterToLight: AlmanacStep<Water, Light>,
+    val lightToTemperature: AlmanacStep<Light, Temperature>,
+    val temperatureToHumidity: AlmanacStep<Temperature, Humidity>,
+    val humidityToLocation: AlmanacStep<Humidity, Location>
 ) {
 
     /**
@@ -89,7 +87,7 @@ data class Almanac(
 
             val seedRanges = seeds
                 .windowed(2, step = 2)
-                .map { (first, second) -> first..Seed(first.value + second.value) }
+                .map { (first, second) -> first..Seed(first.value + second.value - 1) }
 
             return Almanac(
                 seeds = seeds.toSet(),
@@ -118,153 +116,11 @@ data class Almanac(
             .map { line ->
                 line.split(Regex("\\s+")).mapNotNull { it.toLongOrNull() }
                     .also { require(it.size == 3) { "Each map entry must have a length of three" } }
-                    .let { (firstValue, firstKey, size) -> firstKey..(firstKey + size) to firstValue..(firstValue + size) }
+                    .let { (firstValue, firstKey, size) -> firstKey..<(firstKey + size) to firstValue..<(firstValue + size) }
             }
-            .let { RangeLookup(extractKey, transformValue, it) }
+            .let { AlmanacStep(extractKey, transformValue, it) }
+
+        private operator fun ClosedRange<Seed>.iterator() =
+            (start.value..endInclusive.value).asSequence().map(::Seed).iterator()
     }
 }
-
-/**
- * A type of seed.
- *
- * @property value The value representing the type of seed.
- */
-@JvmInline
-value class Seed(val value: Long) : Comparable<Seed> {
-
-    override fun compareTo(other: Seed): Int = value.compareTo(other.value)
-}
-
-/**
- * A type of soil.
- *
- * @property value The value representing the type of soil.
- */
-@JvmInline
-value class Soil(val value: Long) : Comparable<Soil> {
-
-    override fun compareTo(other: Soil): Int = value.compareTo(other.value)
-}
-
-/**
- * A type of fertilizer.
- *
- * @property value The value representing the type of fertilizer.
- */
-@JvmInline
-value class Fertilizer(val value: Long) : Comparable<Fertilizer> {
-
-    override fun compareTo(other: Fertilizer): Int = value.compareTo(other.value)
-}
-
-/**
- * An amount of water.
- *
- * @property value The value representing the amount of water.
- */
-@JvmInline
-value class Water(val value: Long) : Comparable<Water> {
-
-    override fun compareTo(other: Water): Int = value.compareTo(other.value)
-}
-
-/**
- * An amount of light.
- *
- * @property value The value representing the amount of light.
- */
-@JvmInline
-value class Light(val value: Long) : Comparable<Light> {
-
-    override fun compareTo(other: Light): Int = value.compareTo(other.value)
-}
-
-/**
- * A temperature.
- *
- * @property value The value representing the temperature.
- */
-@JvmInline
-value class Temperature(val value: Long) : Comparable<Temperature> {
-
-    override fun compareTo(other: Temperature): Int = value.compareTo(other.value)
-}
-
-/**
- * An amount of humidity.
- *
- * @property value The value representing the amount of humidity.
- */
-@JvmInline
-value class Humidity(val value: Long) : Comparable<Humidity> {
-
-    override fun compareTo(other: Humidity): Int = value.compareTo(other.value)
-}
-
-/**
- * A type of location.
- *
- * @property value The value representing the type of location.
- */
-@JvmInline
-value class Location(val value: Long) : Comparable<Location> {
-
-    override fun compareTo(other: Location): Int = value.compareTo(other.value)
-}
-
-// TODO: Clean up and extract generic code
-class RangeLookup<K : Comparable<K>, V : Comparable<V>>(
-    private val extractKey: (K) -> Long,
-    private val transformValue: (Long) -> V,
-    ranges: List<Pair<LongRange, LongRange>>
-) {
-
-    private val ranges = ranges.sortedBy { it.first.first }
-
-    init {
-        require(ranges.all { it.first.size == it.second.size })
-    }
-
-    operator fun get(key: K): V = get(extractKey(key))
-
-    private fun get(keyValue: Long) = (ranges.firstOrNull { keyValue in it.first }
-        ?.let { transformValue((keyValue - it.first.first) + it.second.first) }
-        ?: transformValue(keyValue))
-
-    fun map(keys: ClosedRange<K>): Set<ClosedRange<V>> {
-        val keyRange = extractKey(keys.start)..extractKey(keys.endInclusive)
-
-        val mapped = ranges.mapNotNull { range ->
-            range.first.coerceIn(keyRange)
-                .takeIf { !it.isEmpty() }
-                ?.let { coercedKeys ->
-                    val firstValue = range.second.first + (coercedKeys.first - range.first.first)
-                    val lastValue = range.second.last - (range.first.last - coercedKeys.last)
-                    coercedKeys to firstValue..lastValue
-                }
-        }
-
-        val unmapped = sequence {
-            var i = keyRange.first
-
-            mapped.forEach { range ->
-                if (i < range.first.first) {
-                    yield(i..<range.first.first)
-                }
-                i = range.first.last + 1
-            }
-
-            if (i <= keyRange.last) {
-                yield(i..keyRange.last)
-            }
-        }
-
-        return (mapped.asSequence().map { it.second } + unmapped)
-            .map { range -> transformValue(range.first)..transformValue(range.last) }
-            .toSet()
-    }
-
-    fun mapAll(keys: Iterable<ClosedRange<K>>): Set<ClosedRange<V>> = keys.flatMap(::map).toSet()
-}
-
-operator fun ClosedRange<Seed>.iterator() = (start.value..endInclusive.value).asSequence().map(::Seed).iterator()

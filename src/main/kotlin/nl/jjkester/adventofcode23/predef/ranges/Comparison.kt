@@ -1,4 +1,4 @@
-package nl.jjkester.adventofcode23.predef
+package nl.jjkester.adventofcode23.predef.ranges
 
 /**
  * Whether this [ClosedRange] fully contains the [other] [ClosedRange].

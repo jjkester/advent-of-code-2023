@@ -1,6 +1,6 @@
 package nl.jjkester.adventofcode23.predef.space
 
-import nl.jjkester.adventofcode23.predef.coerceIn
+import nl.jjkester.adventofcode23.predef.ranges.coerceIn
 
 /**
  * An area in a two-dimensional space.

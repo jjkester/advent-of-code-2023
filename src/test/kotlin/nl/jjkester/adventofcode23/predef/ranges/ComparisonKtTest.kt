@@ -1,4 +1,4 @@
-package nl.jjkester.adventofcode23.predef
+package nl.jjkester.adventofcode23.predef.ranges
 
 import assertk.assertThat
 import assertk.assertions.isFalse
@@ -6,7 +6,7 @@ import assertk.assertions.isTrue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
-class RangesKtTest {
+class ComparisonKtTest {
 
     private val baseRange = 13..42
 
