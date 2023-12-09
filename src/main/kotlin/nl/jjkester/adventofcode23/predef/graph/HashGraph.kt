@@ -29,6 +29,14 @@ class HashGraph<T, V : Vertex<T>, E : Edge<V>>(
 
     override fun contains(element: T): Boolean = data.keys.any { it.element == element }
 
+    override fun edgesFrom(vertex: V): Set<E> = data[vertex]
+        ?.mapNotNullTo(mutableSetOf()) { it.takeIf { it.from == vertex || !it.directional } }
+        .orEmpty()
+
+    override fun edgesTo(vertex: V): Set<E> = data[vertex]
+        ?.mapNotNullTo(mutableSetOf()) { it.takeIf { it.to == vertex || !it.directional } }
+        .orEmpty()
+
     override fun addVertex(vertex: V): Boolean = data.putIfAbsent(vertex, hashSetOf()) == null
 
     override fun addEdge(edge: E): Boolean = data.computeIfAbsent(edge.from) { hashSetOf() }.add(edge) &&

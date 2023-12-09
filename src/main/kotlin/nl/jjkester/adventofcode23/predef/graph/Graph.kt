@@ -42,4 +42,20 @@ interface Graph<out T, out V : Vertex<T>, out E : Edge<V>> {
      * @return Whether the [edge] is contained in this graph.
      */
     fun containsEdge(edge: @UnsafeVariance E): Boolean
+
+    /**
+     * Returns the set of outgoing edges of the [vertex].
+     *
+     * @param vertex Vertex to start from.
+     * @return The set outgoing edges of [vertex].
+     */
+    fun edgesFrom(vertex: @UnsafeVariance V): Set<E>
+
+    /**
+     * Returns the set of incoming edges of the [vertex].
+     *
+     * @param vertex Vertex to start from.
+     * @return The set of incoming edges of the [vertex].
+     */
+    fun edgesTo(vertex: @UnsafeVariance V): Set<E>
 }

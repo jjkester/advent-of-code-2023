@@ -136,6 +136,28 @@ class HashGraphTest {
             .isFalse()
     }
 
+    @ParameterizedTest
+    @MethodSource("edgesFrom")
+    fun edgesFrom(
+        systemUnderTest: HashGraph<Int?, Vertex<Int?>, Edge<Vertex<Int?>>>,
+        vertex: Vertex<Int?>,
+        expected: Set<Edge<*>>
+    ) {
+        assertThat(systemUnderTest.edgesFrom(vertex))
+            .isEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource("edgesTo")
+    fun edgesTo(
+        systemUnderTest: HashGraph<Int?, Vertex<Int?>, Edge<Vertex<Int?>>>,
+        vertex: Vertex<Int?>,
+        expected: Set<Edge<*>>
+    ) {
+        assertThat(systemUnderTest.edgesTo(vertex))
+            .isEqualTo(expected)
+    }
+
     companion object {
         private val empty
             get() = hashGraphOf<Int?>()
@@ -144,6 +166,13 @@ class HashGraphTest {
                 edgeOf(vertexOf(1), vertexOf(null)),
                 edgeOf(vertexOf(null), vertexOf(2)),
                 edgeOf(vertexOf(2), vertexOf(3))
+            )
+        private val directional
+            get() = hashGraphOf(
+                edgeOf(vertexOf(1), vertexOf(null)),
+                directionalEdgeOf(vertexOf(null), vertexOf(2)),
+                directionalEdgeOf(vertexOf(2), vertexOf(3)),
+                directionalEdgeOf(vertexOf(3), vertexOf(2))
             )
 
         @JvmStatic
@@ -160,7 +189,7 @@ class HashGraphTest {
                 arrayOf(
                     edgeOf(vertexOf(1), vertexOf(null)),
                     edgeOf(vertexOf(null), vertexOf(2)),
-                    edgeOf(vertexOf(2), vertexOf(3))
+                    edgeOf(vertexOf(2), vertexOf(3)),
                 )
             )
         )
@@ -169,6 +198,52 @@ class HashGraphTest {
         fun elements() = arrayOf(
             Arguments.of(empty, emptyArray<Int?>()),
             Arguments.of(withNull, arrayOf(1, 2, 3, null))
+        )
+
+        @JvmStatic
+        fun edgesFrom() = arrayOf(
+            Arguments.of(
+                directional,
+                vertexOf(1),
+                setOf(edgeOf(vertexOf(1), vertexOf(null)))
+            ),
+            Arguments.of(
+                directional,
+                vertexOf(null),
+                setOf(
+                    edgeOf(vertexOf(1), vertexOf(null)),
+                    directionalEdgeOf(vertexOf(null), vertexOf(2))
+                )
+            ),
+            Arguments.of(
+                directional,
+                vertexOf(2),
+                setOf(directionalEdgeOf(vertexOf(2), vertexOf(3)))
+            ),
+            Arguments.of(directional, vertexOf(4), emptySet<Edge<*>>())
+        )
+
+        @JvmStatic
+        fun edgesTo() = arrayOf(
+            Arguments.of(
+                directional,
+                vertexOf(1),
+                setOf(edgeOf(vertexOf(1), vertexOf(null)))
+            ),
+            Arguments.of(
+                directional,
+                vertexOf(null),
+                setOf(edgeOf(vertexOf(1), vertexOf(null)))
+            ),
+            Arguments.of(
+                directional,
+                vertexOf(2),
+                setOf(
+                    directionalEdgeOf(vertexOf(null), vertexOf(2)),
+                    directionalEdgeOf(vertexOf(3), vertexOf(2))
+                )
+            ),
+            Arguments.of(directional, vertexOf(4), emptySet<Edge<*>>())
         )
     }
 }
