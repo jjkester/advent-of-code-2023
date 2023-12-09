@@ -8,4 +8,15 @@ package nl.jjkester.adventofcode23.predef.space
  * @property z Range on the z-axis this volume covers.
  * @constructor Creates a new volume covering where the [x], [y] and [z] ranges overlap.
  */
-data class RangeVolume(override val x: IntRange, override val y: IntRange, override val z: IntRange) : AbstractVolume()
+data class RangeVolume(
+    override val x: IntRange,
+    override val y: IntRange,
+    override val z: IntRange
+) : AbstractVolume() {
+
+    override fun get(facing: Volume.Facing): Area = when(facing) {
+        Volume.Facing.Top, Volume.Facing.Bottom -> RangeArea(x, z)
+        Volume.Facing.Front, Volume.Facing.Back -> RangeArea(x, y)
+        Volume.Facing.Left, Volume.Facing.Right -> RangeArea(z, y)
+    }
+}
