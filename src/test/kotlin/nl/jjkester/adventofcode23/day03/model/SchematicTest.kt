@@ -2,8 +2,8 @@ package nl.jjkester.adventofcode23.day03.model
 
 import assertk.assertThat
 import assertk.assertions.containsExactly
-import nl.jjkester.adventofcode23.predef.space.D2Coordinate
-import nl.jjkester.adventofcode23.predef.space.Rectangle
+import nl.jjkester.adventofcode23.predef.space.RangeArea
+import nl.jjkester.adventofcode23.predef.space.by
 import org.junit.jupiter.api.Test
 
 class SchematicTest {
@@ -29,16 +29,16 @@ class SchematicTest {
     fun findNumbers() {
         assertThat(parsedTestInput.findNumbers())
             .containsExactly(
-                Rectangle(0..2, 0) to 467,
-                Rectangle(5..7, 0) to 114,
-                Rectangle(2..3, 2) to 35,
-                Rectangle(6..8, 2) to 633,
-                Rectangle(0..2, 4) to 617,
-                Rectangle(7..8, 5) to 58,
-                Rectangle(2..4, 6) to 592,
-                Rectangle(6..8, 7) to 755,
-                Rectangle(1..3, 9) to 664,
-                Rectangle(5..7, 9) to 598
+                RangeArea(0..2, 0) to 467,
+                RangeArea(5..7, 0) to 114,
+                RangeArea(2..3, 2) to 35,
+                RangeArea(6..8, 2) to 633,
+                RangeArea(0..2, 4) to 617,
+                RangeArea(7..8, 5) to 58,
+                RangeArea(2..4, 6) to 592,
+                RangeArea(6..8, 7) to 755,
+                RangeArea(1..3, 9) to 664,
+                RangeArea(5..7, 9) to 598
             )
     }
 
@@ -52,9 +52,9 @@ class SchematicTest {
     fun findStars() {
         assertThat(parsedTestInput.findStars())
             .containsExactly(
-                D2Coordinate(3, 1),
-                D2Coordinate(3, 4),
-                D2Coordinate(5, 8)
+                3 by 1,
+                3 by 4,
+                5 by 8
             )
     }
 

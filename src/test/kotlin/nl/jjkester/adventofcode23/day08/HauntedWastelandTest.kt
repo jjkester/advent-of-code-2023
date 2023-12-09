@@ -13,7 +13,7 @@ class HauntedWastelandTest {
 
     @ParameterizedTest
     @MethodSource("steps")
-    fun steps(parsedTestInput: PouchMap, expectedResult: Long) {
+    fun steps(parsedTestInput: PouchMap, expectedResult: Int) {
         assertThat(HauntedWasteland.steps(parsedTestInput))
             .isEqualTo(expectedResult)
     }
@@ -23,6 +23,9 @@ class HauntedWastelandTest {
         val testInput = """
             LR
 
+            AAA = (BBB, XXX)
+            BBB = (XXX, ZZZ)
+            ZZZ = (ZZZ, ZZZ)
             11A = (11B, XXX)
             11B = (XXX, 11Z)
             11Z = (11B, XXX)
@@ -35,7 +38,7 @@ class HauntedWastelandTest {
         val parsedTestInput = PouchMap.parse(testInput)
 
         assertThat(HauntedWasteland.stepsWithGhosts(parsedTestInput))
-            .isEqualTo(BigInteger.valueOf(6L))
+            .isEqualTo(6L)
     }
 
     companion object {

@@ -1,6 +1,6 @@
 package nl.jjkester.adventofcode23.predef.space
 
-private class D2AreaMapValues<T>(private val areaMap: AreaMap<T>) : Collection<T> {
+private class AreaMapValueCollection<T>(private val areaMap: AreaMap<T>) : Collection<T> {
     override val size: Int
         get() = areaMap.size
 
@@ -19,4 +19,7 @@ private class D2AreaMapValues<T>(private val areaMap: AreaMap<T>) : Collection<T
     override fun contains(element: T): Boolean = areaMap.contains(element)
 }
 
-fun <T> AreaMap<T>.values(): Collection<T> = D2AreaMapValues(this)
+/**
+ * Returns the collection of values in this area map.
+ */
+fun <T> AreaMap<T>.values(): Collection<T> = AreaMapValueCollection(this)

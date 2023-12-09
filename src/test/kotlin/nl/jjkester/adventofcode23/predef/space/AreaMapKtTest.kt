@@ -15,7 +15,7 @@ class AreaMapKtTest {
     fun `get extension function delegates to get on implementation`() {
         val x = Random.nextInt()
         val y = Random.nextInt()
-        val coordinate = D2Coordinate(x, y)
+        val coordinate = coordinateOf(x, y)
         val returnValue = Random.nextInt()
 
         areaMap.stub {
@@ -68,7 +68,7 @@ class AreaMapKtTest {
     fun `when the coordinate is contained in the area, then getOrNull with coordinate returns the value`() {
         val x = Random.nextInt()
         val y = Random.nextInt()
-        val coordinate = D2Coordinate(x, y)
+        val coordinate = coordinateOf(x, y)
         val returnValue = Random.nextInt()
 
         areaMap.stub {
@@ -88,7 +88,7 @@ class AreaMapKtTest {
     fun `when the coordinate is not contained in the area, then getOrNull with coordinate returns null`() {
         val x = Random.nextInt()
         val y = Random.nextInt()
-        val coordinate = D2Coordinate(x, y)
+        val coordinate = coordinateOf(x, y)
 
         areaMap.stub {
             on { contains(any(), any()) } doReturn false

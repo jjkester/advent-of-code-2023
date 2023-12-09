@@ -16,7 +16,7 @@ class AreaKtTest {
     fun `contains extension function delegates to contains on interface`(returnValue: Boolean) {
         val x = Random.nextInt()
         val y = Random.nextInt()
-        val coordinate = D2Coordinate(x, y)
+        val coordinate = coordinateOf(x, y)
 
         area.stub {
             on { contains(any(), any()) } doReturn returnValue

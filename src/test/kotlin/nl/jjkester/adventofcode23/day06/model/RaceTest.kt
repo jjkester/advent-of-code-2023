@@ -19,7 +19,7 @@ class RaceTest {
     @Test
     fun competitiveOptions() {
         assertThat(Race(7, 9).competitiveOptions())
-            .containsExactly(2, 3, 4, 5)
+            .containsExactly(2L, 3L, 4L, 5L)
     }
 
     companion object {

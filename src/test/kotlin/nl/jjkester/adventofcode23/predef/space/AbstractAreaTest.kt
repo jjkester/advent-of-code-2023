@@ -39,7 +39,7 @@ class AbstractAreaTest {
     }
 
     companion object {
-        private val areaForContains = Rectangle(2..6, 12..16)
+        private val areaForContains = RangeArea(2..6, 12..16)
 
         @JvmStatic
         fun areasForSize() = arrayOf(

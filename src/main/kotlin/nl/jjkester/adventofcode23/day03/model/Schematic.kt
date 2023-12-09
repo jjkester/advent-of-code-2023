@@ -25,7 +25,7 @@ class Schematic private constructor(
     override fun iterator(): Iterator<Pair<D2Coordinate, Char>> = iterator {
         y.forEach { y ->
             x.forEach { x ->
-                yield(D2Coordinate(x, y) to get(x, y))
+                yield(coordinateOf(x, y) to get(x, y))
             }
         }
     }
@@ -85,9 +85,9 @@ class Schematic private constructor(
                 // If the char is not a digit, or when this is the end of the line, yield the number
                 if ((!char.isNumber() || col == x.last) && buffer.isNotEmpty()) {
                     val number = buffer.joinToString("").toInt()
-                    val rectangle = Rectangle((col - buffer.size)..<col, line)
+                    val rangeArea = RangeArea((col - buffer.size)..<col, line)
 
-                    yield(rectangle to number)
+                    yield(rangeArea to number)
                     buffer.clear()
                 }
             }

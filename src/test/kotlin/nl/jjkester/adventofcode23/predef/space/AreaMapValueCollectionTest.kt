@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.kotlin.*
 import kotlin.random.Random
 
-class AreaMapValuesTest {
+class AreaMapValueCollectionTest {
 
     private val area: AreaMap<Int> = mock()
 

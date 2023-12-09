@@ -50,7 +50,7 @@ class AreaCoordinateSetTest {
     fun `contains delegates to contains on area`(returnValue: Boolean) {
         val x = Random.nextInt()
         val y = Random.nextInt()
-        val coordinate = D2Coordinate(x, y)
+        val coordinate = coordinateOf(x, y)
 
         area.stub {
             on { contains(any(), any()) } doReturn returnValue
@@ -99,23 +99,23 @@ class AreaCoordinateSetTest {
 
         assertThat(systemUnderTest.iterator().asSequence())
             .containsExactlyInAnyOrder(
-                D2Coordinate(0, 2),
-                D2Coordinate(0, 3),
-                D2Coordinate(0, 4),
-                D2Coordinate(1, 2),
-                D2Coordinate(1, 3),
-                D2Coordinate(1, 4)
+                coordinateOf(0, 2),
+                coordinateOf(0, 3),
+                coordinateOf(0, 4),
+                coordinateOf(1, 2),
+                coordinateOf(1, 3),
+                coordinateOf(1, 4)
             )
     }
 
     companion object {
         private val containedCoordinates = arrayOf(
-            D2Coordinate(1, 1),
-            D2Coordinate(2, 2),
+            coordinateOf(1, 1),
+            coordinateOf(2, 2),
         )
         private val notContainedCoordinates = arrayOf(
-            D2Coordinate(3, 3),
-            D2Coordinate(4, 4)
+            coordinateOf(3, 3),
+            coordinateOf(4, 4)
         )
 
         @JvmStatic
