@@ -18,7 +18,7 @@ class RangeAreaTest {
 
     @Test
     fun `constructor with value for x`() {
-        assertThat(RangeArea(0, 2..3)).all {
+        assertThat(RangeArea(0..0, 2..3)).all {
             prop(RangeArea::x).isEqualTo(0..0)
             prop(RangeArea::y).isEqualTo(2..3)
         }
@@ -26,7 +26,7 @@ class RangeAreaTest {
 
     @Test
     fun `constructor with value for y`() {
-        assertThat(RangeArea(0..2, 3)).all {
+        assertThat(RangeArea(0..2, 3..3)).all {
             prop(RangeArea::x).isEqualTo(0..2)
             prop(RangeArea::y).isEqualTo(3..3)
         }
@@ -34,7 +34,7 @@ class RangeAreaTest {
 
     @Test
     fun `constructor with values for x and y`() {
-        assertThat(RangeArea(0, 1)).all {
+        assertThat(RangeArea(0..0, 1..1)).all {
             prop(RangeArea::x).isEqualTo(0..0)
             prop(RangeArea::y).isEqualTo(1..1)
         }

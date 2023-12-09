@@ -9,32 +9,43 @@ import nl.jjkester.adventofcode23.predef.ranges.coerceIn
  * @property y Range on the y-axis this area covers.
  * @constructor Creates a new area covering where the [x] and [y] ranges overlap.
  */
-data class RangeArea(override val x: IntRange, override val y: IntRange) : AbstractArea() {
+data class RangeArea(override val x: IntRange, override val y: IntRange) : AbstractArea()
 
-    /**
-     * Creates a new area covering an area where the [x] line covers the [y] range.
-     *
-     * @param x Value on the x-axis this area covers.
-     * @param y Range on the y-axis this area covers.
-     */
-    constructor(x: Int, y: IntRange) : this(x..x, y)
+/**
+ * Creates and returns an area covering the ranges of [x] and [y] coordinates.
+ *
+ * @param x Value on the x-axis the area covers.
+ * @param y Range on the y-axis the area covers.
+ * @return An area covering the [x] and [y] coordinates.
+ */
+fun areaOf(x: IntRange, y: IntRange): RangeArea = RangeArea(x, y)
 
-    /**
-     * Creates a new area covering an area where the [y] line covers the [x] range.
-     *
-     * @param x Range on the x-axis this area covers.
-     * @param y Value on the y-axis this area covers.
-     */
-    constructor(x: IntRange, y: Int) : this(x, y..y)
+/**
+ * Creates and returns an area covering where the [x] line covers the [y] range.
+ *
+ * @param x Value on the x-axis the area covers.
+ * @param y Range on the y-axis the area covers.
+ * @return An area covering the [x] and [y] coordinates.
+ */
+fun areaOf(x: Int, y: IntRange): RangeArea = RangeArea(x..x, y)
 
-    /**
-     * Creates a new area covering an area where the [x] line crosses the [y] line.
-     *
-     * @param x Value on the x-axis this area covers.
-     * @param y Value on the y-axis this area covers.
-     */
-    constructor(x: Int, y: Int) : this(x..x, y..y)
-}
+/**
+ * Creates and returns an area covering where the [y] line covers the [x] range.
+ *
+ * @param x Range on the x-axis the area covers.
+ * @param y Value on the y-axis the area covers.
+ * @return An area covering the [x] and [y] coordinates.
+ */
+fun areaOf(x: IntRange, y: Int): RangeArea = RangeArea(x, y..y)
+
+/**
+ * Creates and returns an area covering where the [x] line crosses the [y] line.
+ *
+ * @param x Value on the x-axis the area covers.
+ * @param y Value on the y-axis the area covers.
+ * @return An area covering the [x] and [y] coordinates.
+ */
+fun areaOf(x: Int, y: Int): RangeArea = RangeArea(x..x, y..y)
 
 /**
  * Returns a new area that is evenly scaled by the [amount]. The area is shrunk or expanded by the [amount] in

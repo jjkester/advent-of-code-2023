@@ -20,3 +20,13 @@ data class RangeVolume(
         Volume.Facing.Left, Volume.Facing.Right -> RangeArea(z, y)
     }
 }
+
+/**
+ * Creates and returns a volume covering the ranges of [x], [y] and [z] coordinates.
+ *
+ * @param x Value on the x-axis the area covers.
+ * @param y Range on the y-axis the area covers.
+ * @param z Range on the z-axis the area covers.
+ * @return A volume covering the [x], [y] and [z] coordinates.
+ */
+fun volumeOf(x: IntRange, y: IntRange, z: IntRange): RangeVolume = RangeVolume(x, y, z)

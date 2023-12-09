@@ -85,7 +85,7 @@ class Schematic private constructor(
                 // If the char is not a digit, or when this is the end of the line, yield the number
                 if ((!char.isNumber() || col == x.last) && buffer.isNotEmpty()) {
                     val number = buffer.joinToString("").toInt()
-                    val rangeArea = RangeArea((col - buffer.size)..<col, line)
+                    val rangeArea = areaOf((col - buffer.size)..<col, line)
 
                     yield(rangeArea to number)
                     buffer.clear()

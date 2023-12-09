@@ -2,7 +2,7 @@ package nl.jjkester.adventofcode23.day03.model
 
 import assertk.assertThat
 import assertk.assertions.containsExactly
-import nl.jjkester.adventofcode23.predef.space.RangeArea
+import nl.jjkester.adventofcode23.predef.space.areaOf
 import nl.jjkester.adventofcode23.predef.space.by
 import org.junit.jupiter.api.Test
 
@@ -29,16 +29,16 @@ class SchematicTest {
     fun findNumbers() {
         assertThat(parsedTestInput.findNumbers())
             .containsExactly(
-                RangeArea(0..2, 0) to 467,
-                RangeArea(5..7, 0) to 114,
-                RangeArea(2..3, 2) to 35,
-                RangeArea(6..8, 2) to 633,
-                RangeArea(0..2, 4) to 617,
-                RangeArea(7..8, 5) to 58,
-                RangeArea(2..4, 6) to 592,
-                RangeArea(6..8, 7) to 755,
-                RangeArea(1..3, 9) to 664,
-                RangeArea(5..7, 9) to 598
+                areaOf(0..2, 0) to 467,
+                areaOf(5..7, 0) to 114,
+                areaOf(2..3, 2) to 35,
+                areaOf(6..8, 2) to 633,
+                areaOf(0..2, 4) to 617,
+                areaOf(7..8, 5) to 58,
+                areaOf(2..4, 6) to 592,
+                areaOf(6..8, 7) to 755,
+                areaOf(1..3, 9) to 664,
+                areaOf(5..7, 9) to 598
             )
     }
 
