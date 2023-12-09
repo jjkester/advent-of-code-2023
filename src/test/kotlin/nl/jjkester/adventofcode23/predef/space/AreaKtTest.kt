@@ -7,9 +7,9 @@ import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.kotlin.*
 import kotlin.random.Random
 
-class D2AreaKtTest {
+class AreaKtTest {
 
-    private val area: D2Area = mock()
+    private val area: Area = mock()
 
     @ParameterizedTest
     @ValueSource(booleans = [true, false])

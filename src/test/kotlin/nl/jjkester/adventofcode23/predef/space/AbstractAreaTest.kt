@@ -8,18 +8,18 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class AbstractD2AreaTest {
+class AbstractAreaTest {
 
     @ParameterizedTest
     @MethodSource("areasForSize")
-    fun `area size is calculated based on the x and y ranges`(area: D2Area, expectedSize: Int) {
+    fun `area size is calculated based on the x and y ranges`(area: Area, expectedSize: Int) {
         assertThat(area.size)
             .isEqualTo(expectedSize)
     }
 
     @ParameterizedTest
     @MethodSource("areasForSize")
-    fun `when area size is zero, then isEmpty is true`(area: D2Area, expectedSize: Int) {
+    fun `when area size is zero, then isEmpty is true`(area: Area, expectedSize: Int) {
         assertThat(area.isEmpty())
             .isEqualTo(expectedSize == 0)
     }
@@ -43,11 +43,11 @@ class AbstractD2AreaTest {
 
         @JvmStatic
         fun areasForSize() = arrayOf(
-            Arguments.of(TestD2Area(-2..0, 0..2), 9),
-            Arguments.of(TestD2Area(-2..2, -2..2), 25),
-            Arguments.of(TestD2Area(0..2, 0..2), 9),
-            Arguments.of(TestD2Area(IntRange.EMPTY, 0..2), 0),
-            Arguments.of(TestD2Area(0..2, IntRange.EMPTY), 0),
+            Arguments.of(TestArea(-2..0, 0..2), 9),
+            Arguments.of(TestArea(-2..2, -2..2), 25),
+            Arguments.of(TestArea(0..2, 0..2), 9),
+            Arguments.of(TestArea(IntRange.EMPTY, 0..2), 0),
+            Arguments.of(TestArea(0..2, IntRange.EMPTY), 0),
         )
 
         @JvmStatic
@@ -71,5 +71,5 @@ class AbstractD2AreaTest {
         )
     }
 
-    private class TestD2Area(override val x: IntRange, override val y: IntRange) : AbstractD2Area()
+    private class TestArea(override val x: IntRange, override val y: IntRange) : AbstractArea()
 }

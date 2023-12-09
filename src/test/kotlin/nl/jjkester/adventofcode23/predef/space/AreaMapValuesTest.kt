@@ -1,7 +1,7 @@
 package nl.jjkester.adventofcode23.predef.space
 
 import assertk.assertThat
-import assertk.assertions.containsExactlyInAnyOrder
+import assertk.assertions.containsExactly
 import assertk.assertions.isEqualTo
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -11,11 +11,11 @@ import org.junit.jupiter.params.provider.ValueSource
 import org.mockito.kotlin.*
 import kotlin.random.Random
 
-class D2AreaCoordinateSetTest {
+class AreaMapValuesTest {
 
-    private val area: D2Area = mock()
+    private val area: AreaMap<Int> = mock()
 
-    private val systemUnderTest = area.coordinates()
+    private val systemUnderTest = area.values()
 
     @ParameterizedTest
     @ValueSource(ints = [0, 1, 2, Int.MAX_VALUE])
@@ -48,81 +48,69 @@ class D2AreaCoordinateSetTest {
     @ParameterizedTest
     @ValueSource(booleans = [true, false])
     fun `contains delegates to contains on area`(returnValue: Boolean) {
-        val x = Random.nextInt()
-        val y = Random.nextInt()
-        val coordinate = D2Coordinate(x, y)
+        val value = Random.nextInt()
 
         area.stub {
-            on { contains(any(), any()) } doReturn returnValue
+            on { contains(any()) } doReturn returnValue
         }
 
-        assertThat(systemUnderTest.contains(coordinate))
+        assertThat(systemUnderTest.contains(value))
             .isEqualTo(returnValue)
 
-        verify(area).contains(x, y)
+        verify(area).contains(value)
         verifyNoMoreInteractions(area)
     }
 
     @ParameterizedTest
-    @MethodSource("coordinatesForContainsAll")
+    @MethodSource("valuesForContainsAll")
     fun `containsAll combines results from contains on area`(
-        coordinates: Array<D2Coordinate>,
+        values: Array<Int>,
         expectedResult: Boolean
     ) {
         area.stub {
-            on { contains(any(), any()) } doReturn false
-            containedCoordinates.forEach { coordinate ->
-                on { contains(coordinate.x, coordinate.y) } doReturn true
+            on { contains(any()) } doReturn false
+            containedValues.forEach { value ->
+                on { contains(value) } doReturn true
             }
         }
 
-        assertThat(systemUnderTest.containsAll(coordinates.toList()))
+        assertThat(systemUnderTest.containsAll(values.toList()))
             .isEqualTo(expectedResult)
 
-        coordinates
+        values
             .run {
-                val lastCalledIndex = lastOrNull { it in containedCoordinates }?.let { indexOf(it) + 1 }
+                val lastCalledIndex = lastOrNull { it in containedValues }?.let { indexOf(it) + 1 }
                 take((lastCalledIndex ?: 0) + 1)
             }
-            .forEach { coordinate ->
-                verify(area).contains(coordinate.x, coordinate.y)
+            .forEach { value ->
+                verify(area).contains(value)
             }
         verifyNoMoreInteractions(area)
     }
 
     @Test
     fun `iterator iterates over the coordinates in the area`() {
+        val values = generateSequence(1, Int::inc).iterator()
+
         area.stub {
             on { x } doReturn 0..1
             on { y } doReturn 2..4
+            on { get(any(), any()) } doAnswer { values.next() }
         }
 
         assertThat(systemUnderTest.iterator().asSequence())
-            .containsExactlyInAnyOrder(
-                D2Coordinate(0, 2),
-                D2Coordinate(0, 3),
-                D2Coordinate(0, 4),
-                D2Coordinate(1, 2),
-                D2Coordinate(1, 3),
-                D2Coordinate(1, 4)
-            )
+            .containsExactly(1, 2, 3, 4, 5, 6)
     }
 
     companion object {
-        private val containedCoordinates = arrayOf(
-            D2Coordinate(1, 1),
-            D2Coordinate(2, 2),
-        )
-        private val notContainedCoordinates = arrayOf(
-            D2Coordinate(3, 3),
-            D2Coordinate(4, 4)
-        )
+        private val containedValues = arrayOf(1, 2)
+        private val notContainedValues = arrayOf(3, 4)
 
         @JvmStatic
-        fun coordinatesForContainsAll() = arrayOf(
-            Arguments.of(containedCoordinates, true),
-            Arguments.of(notContainedCoordinates, false),
-            Arguments.of(containedCoordinates + notContainedCoordinates, false)
+        fun valuesForContainsAll() = arrayOf(
+            Arguments.of(containedValues, true),
+            Arguments.of(notContainedValues, false),
+            Arguments.of(containedValues + notContainedValues, false)
         )
     }
 }

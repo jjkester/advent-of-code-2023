@@ -44,14 +44,14 @@ class RectangleKtTest {
 
     @ParameterizedTest
     @MethodSource("areasForCoerceIn")
-    fun `coerceIn with area returns the adjusted rectangle`(coercion: D2Area, expectedResult: Rectangle) {
+    fun `coerceIn with area returns the adjusted rectangle`(coercion: Area, expectedResult: Rectangle) {
         assertThat(rectangleForCoerceIn.coerceIn(coercion))
             .isEqualTo(expectedResult)
     }
 
     @ParameterizedTest
     @MethodSource("areasForCoerceIn")
-    fun `coerceIn with distinct integers returns the adjusted rectangle`(coercion: D2Area, expectedResult: Rectangle) {
+    fun `coerceIn with distinct integers returns the adjusted rectangle`(coercion: Area, expectedResult: Rectangle) {
         assertThat(rectangleForCoerceIn.coerceIn(coercion.x, coercion.y))
             .isEqualTo(expectedResult)
     }

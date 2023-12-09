@@ -3,11 +3,11 @@ package nl.jjkester.adventofcode23.predef.space
 import nl.jjkester.adventofcode23.predef.ranges.size
 
 /**
- * Abstract implementation of [D2Area].
+ * Abstract implementation of [Area].
  *
  * Implements [size], [isEmpty] and [contains] based on the values for [x] and [y].
  */
-abstract class AbstractD2Area : D2Area {
+abstract class AbstractArea : Area {
     final override val size: Int
         get() = x.size * y.size
 

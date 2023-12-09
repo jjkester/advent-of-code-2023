@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*
 import kotlin.random.Random
 
-class D2AreaMapKtTest {
+class AreaMapKtTest {
 
-    private val areaMap: D2AreaMap<Int> = mock()
+    private val areaMap: AreaMap<Int> = mock()
 
     @Test
     fun `get extension function delegates to get on implementation`() {

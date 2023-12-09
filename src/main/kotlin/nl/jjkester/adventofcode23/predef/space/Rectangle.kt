@@ -9,7 +9,7 @@ import nl.jjkester.adventofcode23.predef.ranges.coerceIn
  * @property y Range on the y-axis this rectangle covers.
  * @constructor Creates a new rectangle covering an area where the [x] and [y] ranges overlap.
  */
-data class Rectangle(override val x: IntRange, override val y: IntRange) : AbstractD2Area() {
+data class Rectangle(override val x: IntRange, override val y: IntRange) : AbstractArea() {
 
     /**
      * Creates a new rectangle covering an area where the [x] line covers the [y] range.
@@ -61,7 +61,7 @@ fun Rectangle.scale(amount: Int): Rectangle = if (amount == 0) {
  * @param other The area to limit the size to.
  * @return A new rectangle fit to the bounds of both this and the [other] rectangle.
  */
-fun Rectangle.coerceIn(other: D2Area): Rectangle = coerceIn(other.x, other.y)
+fun Rectangle.coerceIn(other: Area): Rectangle = coerceIn(other.x, other.y)
 
 /**
  * Returns a new rectangle that represents the overlap between the original rectangle and the rectangle from the [x] and

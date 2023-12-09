@@ -3,7 +3,7 @@ package nl.jjkester.adventofcode23.predef.space
 /**
  * An area in a two-dimensional space.
  */
-interface D2Area {
+interface Area {
 
     /**
      * Range on the x-axis that is covered by this area.
@@ -43,4 +43,4 @@ interface D2Area {
  * @param coordinate Coordinate on the x- and y-axes.
  * @return Whether the [coordinate] is within the bounds of this area.
  */
-operator fun D2Area.contains(coordinate: D2Coordinate): Boolean = contains(coordinate.x, coordinate.y)
+operator fun Area.contains(coordinate: D2Coordinate): Boolean = contains(coordinate.x, coordinate.y)
