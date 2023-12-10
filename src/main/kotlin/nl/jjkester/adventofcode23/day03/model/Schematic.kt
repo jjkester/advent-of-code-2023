@@ -4,31 +4,17 @@ import nl.jjkester.adventofcode23.predef.space.*
 import org.jetbrains.kotlinx.multik.api.Multik
 import org.jetbrains.kotlinx.multik.api.d2arrayIndices
 import org.jetbrains.kotlinx.multik.ndarray.data.D2Array
-import org.jetbrains.kotlinx.multik.ndarray.data.get
-import org.jetbrains.kotlinx.multik.ndarray.operations.contains
 
 /**
  * Engine schematic containing numbers and symbols.
  */
 class Schematic private constructor(
-    private val data: D2Array<Int>
-) : AbstractArea(), AreaMap<Char>, Iterable<Pair<D2Coordinate, Char>> {
+    data: D2Array<Int>
+) : MultikAreaMap<Char, Int>(data) {
 
-    override val x: IntRange = 0..<data.shape[0]
+    override fun serialize(element: Char): Int = element.code
 
-    override val y: IntRange = 0..<data.shape[1]
-
-    override fun get(x: Int, y: Int): Char = data[x, y].toChar()
-
-    override fun contains(element: Char): Boolean = data.contains(element.code)
-
-    override fun iterator(): Iterator<Pair<D2Coordinate, Char>> = iterator {
-        y.forEach { y ->
-            x.forEach { x ->
-                yield(coordinateOf(x, y) to get(x, y))
-            }
-        }
-    }
+    override fun deserialize(value: Int): Char = value.toChar()
 
     /**
      * Finds and returns the part numbers in this schematic.
