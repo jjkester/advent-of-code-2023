@@ -66,7 +66,7 @@ class AreaCoordinateSetTest {
     @ParameterizedTest
     @MethodSource("coordinatesForContainsAll")
     fun `containsAll combines results from contains on area`(
-        coordinates: Array<D2Coordinate>,
+        coordinates: Array<Coordinate2D>,
         expectedResult: Boolean
     ) {
         area.stub {

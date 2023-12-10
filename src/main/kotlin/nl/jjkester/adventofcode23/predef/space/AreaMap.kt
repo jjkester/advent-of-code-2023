@@ -33,7 +33,7 @@ interface AreaMap<out T> : Area {
  * @return The element at the [coordinate].
  * @throws IndexOutOfBoundsException The [coordinate] is out of bounds of this area.
  */
-operator fun <T> AreaMap<T>.get(coordinate: D2Coordinate): T = get(coordinate.x, coordinate.y)
+operator fun <T> AreaMap<T>.get(coordinate: Coordinate2D): T = get(coordinate.x, coordinate.y)
 
 /**
  * Returns the element at the [x] and [y] coordinate, or `null` if the coordinate is out of bounds of this area.
@@ -51,4 +51,4 @@ fun <T> AreaMap<T>.getOrNull(x: Int, y: Int): T? = if (contains(x, y)) get(x, y)
  * @param coordinate Coordinate on the x- and y-axes.
  * @return The element at the [coordinate], or `null` if the coordinate is out of bounds of this area.
  */
-fun <T> AreaMap<T>.getOrNull(coordinate: D2Coordinate): T? = getOrNull(coordinate.x, coordinate.y)
+fun <T> AreaMap<T>.getOrNull(coordinate: Coordinate2D): T? = getOrNull(coordinate.x, coordinate.y)

@@ -42,7 +42,7 @@ interface VolumeMap<out T> : Volume {
  * @return The element at the [coordinate].
  * @throws IndexOutOfBoundsException The [coordinate] is out of bounds of this volume.
  */
-operator fun <T> VolumeMap<T>.get(coordinate: D3Coordinate): T = get(coordinate.x, coordinate.y, coordinate.z)
+operator fun <T> VolumeMap<T>.get(coordinate: Coordinate3D): T = get(coordinate.x, coordinate.y, coordinate.z)
 
 /**
  * Returns the element at the [x], [y] and [z] coordinate, or `null` if the coordinate is out of bounds of this volume.
@@ -61,4 +61,4 @@ fun <T> VolumeMap<T>.getOrNull(x: Int, y: Int, z: Int): T? = if (contains(x, y, 
  * @param coordinate Coordinate on the x- and y-axes.
  * @return The element at the [coordinate], or `null` if the coordinate is out of bounds of this volume.
  */
-fun <T> VolumeMap<T>.getOrNull(coordinate: D3Coordinate): T? = getOrNull(coordinate.x, coordinate.y, coordinate.z)
+fun <T> VolumeMap<T>.getOrNull(coordinate: Coordinate3D): T? = getOrNull(coordinate.x, coordinate.y, coordinate.z)

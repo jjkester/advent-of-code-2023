@@ -105,4 +105,4 @@ interface Volume {
  * @param coordinate Coordinate on the x-, y- and z-axes.
  * @return Whether the [coordinate] is within the bounds of this volume.
  */
-operator fun Volume.contains(coordinate: D3Coordinate): Boolean = contains(coordinate.x, coordinate.y, coordinate.z)
+operator fun Volume.contains(coordinate: Coordinate3D): Boolean = contains(coordinate.x, coordinate.y, coordinate.z)

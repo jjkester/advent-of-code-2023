@@ -43,4 +43,4 @@ interface Area {
  * @param coordinate Coordinate on the x- and y-axes.
  * @return Whether the [coordinate] is within the bounds of this area.
  */
-operator fun Area.contains(coordinate: D2Coordinate): Boolean = contains(coordinate.x, coordinate.y)
+operator fun Area.contains(coordinate: Coordinate2D): Boolean = contains(coordinate.x, coordinate.y)

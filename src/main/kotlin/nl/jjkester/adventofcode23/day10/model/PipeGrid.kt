@@ -13,7 +13,7 @@ class PipeGrid private constructor(data: D2Array<Byte>) : MultikAreaMap<Pipe?, B
     /**
      * The coordinate of the single start pipe.
      */
-    val start: D2Coordinate = requireNotNull(singleOrNull { it.second == Pipe.Start }?.first) {
+    val start: Coordinate2D = requireNotNull(singleOrNull { it.second == Pipe.Start }?.first) {
         "Grid must contain a single start pipe"
     }
 
@@ -35,7 +35,7 @@ class PipeGrid private constructor(data: D2Array<Byte>) : MultikAreaMap<Pipe?, B
     /**
      * Finds and returns the areas inside loops.
      */
-    fun findContainedAreas(): Sequence<Set<D2Coordinate>> = findLoops()
+    fun findContainedAreas(): Sequence<Set<Coordinate2D>> = findLoops()
         .map { loop ->
             val coordinates = loop.map { it.coordinate }.toSet()
             val startPipe = Pipe.entries.asSequence()
@@ -75,7 +75,7 @@ class PipeGrid private constructor(data: D2Array<Byte>) : MultikAreaMap<Pipe?, B
      * @param startDirection Direction from the [start] coordinate.
      */
     fun walk(startDirection: Direction): Sequence<Step> = sequence {
-        var position: D2Coordinate = start
+        var position: Coordinate2D = start
         var direction: Direction? = startDirection
         var pipe: Pipe? = get(start)
         var startPipes = 0
@@ -102,7 +102,7 @@ class PipeGrid private constructor(data: D2Array<Byte>) : MultikAreaMap<Pipe?, B
         }
         .toString()
 
-    private fun D2Coordinate.stepTo(direction: Direction) = when (direction) {
+    private fun Coordinate2D.stepTo(direction: Direction) = when (direction) {
         Direction.North -> copy(y = y - 1)
         Direction.East -> copy(x = x + 1)
         Direction.South -> copy(y = y + 1)
@@ -113,7 +113,7 @@ class PipeGrid private constructor(data: D2Array<Byte>) : MultikAreaMap<Pipe?, B
         private val northPipes = setOf(Pipe.NorthSouth, Pipe.NorthEast, Pipe.NorthWest)
 
         fun parse(input: String): PipeGrid {
-            val startIndexes = mutableListOf<D2Coordinate>()
+            val startIndexes = mutableListOf<Coordinate2D>()
             val pipes = input.lineSequence().withIndex()
                 .map { (y, line) ->
                     line.asSequence()
@@ -145,5 +145,5 @@ class PipeGrid private constructor(data: D2Array<Byte>) : MultikAreaMap<Pipe?, B
      * @property pipe The pipe at the [coordinate].
      * @property direction The direction to step in.
      */
-    data class Step(val coordinate: D2Coordinate, val pipe: Pipe, val direction: Direction)
+    data class Step(val coordinate: Coordinate2D, val pipe: Pipe, val direction: Direction)
 }

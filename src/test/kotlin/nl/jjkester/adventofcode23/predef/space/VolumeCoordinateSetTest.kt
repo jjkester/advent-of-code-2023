@@ -67,7 +67,7 @@ class VolumeCoordinateSetTest {
     @ParameterizedTest
     @MethodSource("coordinatesForContainsAll")
     fun `containsAll combines results from contains on volume`(
-        coordinates: Array<D3Coordinate>,
+        coordinates: Array<Coordinate3D>,
         expectedResult: Boolean
     ) {
         volume.stub {

@@ -9,7 +9,7 @@ import org.jetbrains.kotlinx.multik.ndarray.operations.contains
  */
 abstract class MultikAreaMap<T, U : Number>(
     private val data: D2Array<U>
-) : AbstractArea(), AreaMap<T>, Iterable<Pair<D2Coordinate, T>> {
+) : AbstractArea(), AreaMap<T>, Iterable<Pair<Coordinate2D, T>> {
 
     override val x: IntRange = 0..<data.shape[0]
 
@@ -19,7 +19,7 @@ abstract class MultikAreaMap<T, U : Number>(
 
     override fun contains(element: T): Boolean = data.contains(serialize(element))
 
-    override fun iterator(): Iterator<Pair<D2Coordinate, T>> = iterator {
+    override fun iterator(): Iterator<Pair<Coordinate2D, T>> = iterator {
         y.forEach { y ->
             x.forEach { x ->
                 yield(coordinateOf(x, y) to get(x, y))
