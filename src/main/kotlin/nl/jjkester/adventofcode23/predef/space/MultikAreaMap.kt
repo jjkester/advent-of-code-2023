@@ -8,8 +8,8 @@ import org.jetbrains.kotlinx.multik.ndarray.operations.contains
  * Abstract implementation of [AreaMap] using an array of numbers to enable efficient matrix operations.
  */
 abstract class MultikAreaMap<T, U : Number>(
-    private val data: D2Array<U>
-) : AbstractArea(), AreaMap<T>, Iterable<Pair<Coordinate2D, T>> {
+    protected val data: D2Array<U>
+) : AbstractAreaMap<T>(), Iterable<Pair<Coordinate2D, T>> {
 
     override val x: IntRange = 0..<data.shape[0]
 

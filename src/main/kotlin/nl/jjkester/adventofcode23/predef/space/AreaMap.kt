@@ -8,6 +8,16 @@ package nl.jjkester.adventofcode23.predef.space
 interface AreaMap<out T> : Area {
 
     /**
+     * The columns in this area. Each element in each column has the same x coordinate.
+     */
+    val columns: List<List<T>>
+
+    /**
+     * The rows in this area. Each element in each row has the same y coordinate.
+     */
+    val rows: List<List<T>>
+
+    /**
      * Returns the element at the [x] and [y] coordinate.
      *
      * @param x Point on the x-axis.
@@ -52,3 +62,21 @@ fun <T> AreaMap<T>.getOrNull(x: Int, y: Int): T? = if (contains(x, y)) get(x, y)
  * @return The element at the [coordinate], or `null` if the coordinate is out of bounds of this area.
  */
 fun <T> AreaMap<T>.getOrNull(coordinate: Coordinate2D): T? = getOrNull(coordinate.x, coordinate.y)
+
+/**
+ * Returns the contents of the row at the [y] coordinate.
+ *
+ * @param y Coordinate on the y-axis.
+ * @return List of elements at the [y] coordinate.
+ * @throws IndexOutOfBoundsException The [y] coordinate is out of bounds of this area.
+ */
+fun <T> AreaMap<T>.getRow(y: Int): List<T> = x.map { this[it, y] }
+
+/**
+ * Returns the contents of the column at the [x] coordinate.
+ *
+ * @param x Coordinate on the x-axis.
+ * @return List of elements at the [x] coordinate.
+ * @throws IndexOutOfBoundsException The [x] coordinate is out of bounds of this area.
+ */
+fun <T> AreaMap<T>.getColumn(x: Int): List<T> = y.map { this[x, it] }

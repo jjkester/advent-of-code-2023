@@ -1,6 +1,7 @@
 package nl.jjkester.adventofcode23.predef.space
 
 import assertk.assertThat
+import assertk.assertions.containsExactly
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNull
 import org.junit.jupiter.api.Test
@@ -98,6 +99,44 @@ class AreaMapKtTest {
             .isNull()
 
         verify(areaMap).contains(x, y)
+        verifyNoMoreInteractions(areaMap)
+    }
+
+    @Test
+    fun `when retrieving a column then the column contains all elements in order`() {
+        val x = Random.nextInt()
+
+        areaMap.stub {
+            on { y } doReturn 1..3
+            on { get(any(), any()) } doAnswer { it.getArgument(1) }
+        }
+
+        assertThat(areaMap.getColumn(x))
+            .containsExactly(1, 2, 3)
+
+        verify(areaMap).y
+        verify(areaMap).get(x, 1)
+        verify(areaMap).get(x, 2)
+        verify(areaMap).get(x, 3)
+        verifyNoMoreInteractions(areaMap)
+    }
+
+    @Test
+    fun `when retrieving a row then the row contains all elements in order`() {
+        val y = Random.nextInt()
+
+        areaMap.stub {
+            on { x } doReturn 1..3
+            on { get(any(), any()) } doAnswer { it.getArgument(0) }
+        }
+
+        assertThat(areaMap.getRow(y))
+            .containsExactly(1, 2, 3)
+
+        verify(areaMap).x
+        verify(areaMap).get(1, y)
+        verify(areaMap).get(2, y)
+        verify(areaMap).get(3, y)
         verifyNoMoreInteractions(areaMap)
     }
 }
