@@ -27,6 +27,13 @@ abstract class MultikAreaMap<T, U : Number>(
         }
     }
 
+    override fun equals(other: Any?): Boolean = (other as? MultikAreaMap<*, *>)
+        ?.let {
+            this::class.java.isInstance(other) && data == other.data
+        } ?: false
+
+    override fun hashCode(): Int = data.hashCode()
+
     /**
      * Returns the serialized numeric value for the [element].
      *
