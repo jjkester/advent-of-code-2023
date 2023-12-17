@@ -10,7 +10,7 @@ private data class EdgeImpl<out V : Vertex<*>, W : Comparable<W>>(
     override fun contains(vertex: @UnsafeVariance V): Boolean = vertex == from || vertex == to
 
     override fun toString(): String =
-        "Edge($from ${if (directional) "-" else "<"}-${if (weight != NoWeight) "[$weight]" else ""}-> $to)"
+        "($from ${if (directional) "-" else "<"}-${if (weight != NoWeight) "[$weight]" else ""}-> $to)"
 
     object NoWeight : Comparable<NoWeight> {
 

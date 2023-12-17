@@ -2,7 +2,7 @@ package nl.jjkester.adventofcode23.predef.graph
 
 private data class VertexImpl<out T>(override val element: T) : Vertex<T> {
 
-    override fun toString(): String = "Vertex(element=$element)"
+    override fun toString(): String = element.toString()
 }
 
 /**
