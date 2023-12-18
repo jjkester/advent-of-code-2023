@@ -2,7 +2,7 @@ package nl.jjkester.adventofcode23.day08
 
 import nl.jjkester.adventofcode23.day08.model.PouchMap
 import nl.jjkester.adventofcode23.execution.isDay
-import nl.jjkester.adventofcode23.predef.lcm
+import nl.jjkester.adventofcode23.predef.algorithms.lcm
 
 /**
  * https://adventofcode.com/2023/day/8

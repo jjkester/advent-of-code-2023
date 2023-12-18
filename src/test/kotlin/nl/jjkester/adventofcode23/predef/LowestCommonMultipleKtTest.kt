@@ -2,11 +2,12 @@ package nl.jjkester.adventofcode23.predef
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import nl.jjkester.adventofcode23.predef.algorithms.lcm
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
-class MathKtTest {
+class LowestCommonMultipleKtTest {
 
     @ParameterizedTest
     @MethodSource("intLcms")
