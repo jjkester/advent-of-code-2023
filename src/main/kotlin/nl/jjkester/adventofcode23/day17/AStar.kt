@@ -50,7 +50,7 @@ fun <T : Any> aStar(
             }
     }
 
-    checkNotNull(end) { "End vertex is not reachable from the start vertex" }
+    checkNotNull(end) { "No end is reachable from the start vertex" }
 
     return ShortestPath(reconstructPath(end.value, seen), end.cost)
 }

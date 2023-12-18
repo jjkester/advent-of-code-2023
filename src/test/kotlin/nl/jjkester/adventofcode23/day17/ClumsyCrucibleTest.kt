@@ -19,6 +19,22 @@ class ClumsyCrucibleTest {
             .isEqualTo(94)
     }
 
+    @Test
+    fun leastHeatLossUltraAlternative() {
+        val testInput = """
+            111111111111
+            999999999991
+            999999999991
+            999999999991
+            999999999991
+        """.trimIndent()
+
+        val parsedTestInput = CityMap.parse(testInput)
+
+        assertThat(ClumsyCrucible.leastHeatLossUltra(parsedTestInput))
+            .isEqualTo(71)
+    }
+
     companion object {
         private val testInput = """
             2413432311323

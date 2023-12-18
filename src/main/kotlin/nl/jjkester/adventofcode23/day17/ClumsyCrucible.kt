@@ -17,19 +17,28 @@ object ClumsyCrucible {
     /**
      * Part one.
      */
-    fun leastHeatLoss(cityMap: CityMap): Int = shortestPathFast(cityMap) { crucibleNeighbours() }.cost
+    fun leastHeatLoss(cityMap: CityMap): Int = shortestPathFast(
+        cityMap = cityMap,
+        neighbours = { crucibleNeighbours() },
+        endCondition = { true }
+    ).cost
 
     /**
      * Part two.
      */
-    fun leastHeatLossUltra(cityMap: CityMap): Int = shortestPathFast(cityMap) { ultraCrucibleNeighbours() }.cost
+    fun leastHeatLossUltra(cityMap: CityMap): Int = shortestPathFast(
+        cityMap = cityMap,
+        neighbours = { ultraCrucibleNeighbours() },
+        endCondition = { line > 3 }
+    ).cost
 
     private fun shortestPathFast(
         cityMap: CityMap,
-        neighbours: CheckedVertex<Coordinate2D>.() -> Iterable<CheckedVertex<Coordinate2D>>
+        neighbours: CheckedVertex<Coordinate2D>.() -> Iterable<CheckedVertex<Coordinate2D>>,
+        endCondition: CheckedVertex<Coordinate2D>.() -> Boolean
     ) = aStar(
-        start = CheckedVertex(cityMap.start, emptyList()),
-        isEnd = { it.vertex == cityMap.end },
+        start = CheckedVertex(cityMap.start, null, 0),
+        isEnd = { it.vertex == cityMap.end && it.endCondition() },
         neighbourSelector = { checkedVertex -> checkedVertex.neighbours().filter { (to) -> to in cityMap.data } },
         costFunction = { _, it -> cityMap.data[it.vertex] },
         estimatedCostFunction = { cityMap.data[it.vertex] }
@@ -37,11 +46,11 @@ object ClumsyCrucible {
 
     private fun CheckedVertex<Coordinate2D>.crucibleNeighbours() = vertex.neighbours()
         .mapNotNull { (coordinate, direction) ->
-            val notReversing = directions.isEmpty() || direction != directions.last().inverse()
-            val maximumStraight = line < 3 || direction != directions.last()
+            val notReversing = this.direction == null || direction != this.direction.inverse()
+            val maximumStraight = line < 3 || direction != this.direction
 
             if (notReversing && maximumStraight) {
-                CheckedVertex(coordinate, directions.takeLast(2) + direction)
+                CheckedVertex(coordinate, direction, if (this.direction == direction) line + 1 else 1)
             } else {
                 null
             }
@@ -50,12 +59,12 @@ object ClumsyCrucible {
 
     private fun CheckedVertex<Coordinate2D>.ultraCrucibleNeighbours() = vertex.neighbours()
         .mapNotNull { (coordinate, direction) ->
-            val notReversing = directions.isEmpty() || direction != directions.last().inverse()
-            val minimumStraight = directions.isEmpty() || line > 3 || directions.last() == direction
-            val maximumStraight = line < 9 || direction != directions.last()
+            val notReversing = this.direction == null || direction != this.direction.inverse()
+            val minimumStraight = this.direction == null || line > 3 || this.direction == direction
+            val maximumStraight = line < 10 || direction != this.direction
 
             if (notReversing && minimumStraight && maximumStraight) {
-                CheckedVertex(coordinate, directions.takeLast(9) + direction)
+                CheckedVertex(coordinate, direction, if (this.direction == direction) line + 1 else 1)
             } else {
                 null
             }
