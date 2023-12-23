@@ -11,6 +11,7 @@ version = "1.0-SNAPSHOT"
 dependencies {
     implementation(libs.kotlin.stdlib)
     implementation(libs.bundles.kotlinx.multik)
+    implementation(libs.apache.commons.math)
 
     testImplementation(libs.junit)
     testImplementation(libs.assertk)

@@ -1,6 +1,7 @@
 [versions]
 kotlin = "1.9.21"
 kotlinx-multik = "0.2.2"
+apache-commons-math = "3.6.1"
 test-junit = "5.10.1"
 test-assertk = "0.27.0"
 test-mockito = "5.2.1"
@@ -10,6 +11,7 @@ test-pitest = "1.15.0"
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlinx-multik-core = { module = "org.jetbrains.kotlinx:multik-core", version.ref = "kotlinx-multik" }
 kotlinx-multik-default = { module = "org.jetbrains.kotlinx:multik-default", version.ref = "kotlinx-multik" }
+apache-commons-math = { module = "org.apache.commons:commons-math3", version.ref = "apache-commons-math" }
 junit = { module = "org.junit.jupiter:junit-jupiter", version.ref = "test-junit" }
 assertk = { module = "com.willowtreeapps.assertk:assertk", version.ref = "test-assertk" }
 mockito = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "test-mockito" }
