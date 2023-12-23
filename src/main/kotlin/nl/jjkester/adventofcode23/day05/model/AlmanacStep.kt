@@ -1,7 +1,7 @@
 package nl.jjkester.adventofcode23.day05.model
 
 import nl.jjkester.adventofcode23.predef.ranges.coerceIn
-import nl.jjkester.adventofcode23.predef.ranges.mergedLongs
+import nl.jjkester.adventofcode23.predef.ranges.mergeLongRanges
 import nl.jjkester.adventofcode23.predef.ranges.size
 
 /**
@@ -72,7 +72,7 @@ class AlmanacStep<K : Comparable<K>, V : Comparable<V>>(
         }
 
         return (mapped.asSequence().map { it.second } + unmapped)
-            .mergedLongs()
+            .mergeLongRanges()
             .map(::transformValues)
             .toList()
     }
