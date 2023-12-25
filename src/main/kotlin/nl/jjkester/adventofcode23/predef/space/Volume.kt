@@ -86,7 +86,7 @@ interface Volume {
         /**
          * Back facing of a volume.
          *
-         * Covers the [Volume.x] and [Volume.y] axes at the maximum of the [Volume.x] axis.
+         * Covers the [Volume.x] and [Volume.y] axes at the maximum of the [Volume.z] axis.
          */
         Back,
 

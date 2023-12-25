@@ -1,5 +1,7 @@
 package nl.jjkester.adventofcode23.predef.space
 
+import nl.jjkester.adventofcode23.predef.ranges.overlaps
+
 /**
  * An area in a two-dimensional space.
  */
@@ -44,3 +46,11 @@ interface Area {
  * @return Whether the [coordinate] is within the bounds of this area.
  */
 operator fun Area.contains(coordinate: Coordinate2D): Boolean = contains(coordinate.x, coordinate.y)
+
+/**
+ * Returns whether the [other] area overlaps with this area.
+ *
+ * @param other The area to check overlap with.
+ * @return Whether the [other] area overlaps with this area.
+ */
+infix fun Area.overlaps(other: Area): Boolean = x.overlaps(other.x) && y.overlaps(other.y)

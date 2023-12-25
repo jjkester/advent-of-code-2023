@@ -48,6 +48,18 @@ fun areaOf(x: IntRange, y: Int): RangeArea = RangeArea(x, y..y)
 fun areaOf(x: Int, y: Int): RangeArea = RangeArea(x..x, y..y)
 
 /**
+ * Creates and returns an area covering the space between the [first] and [second] coordinate.
+ *
+ * @param first The first corner of the rectangle.
+ * @param second The second corner of the rectangle.
+ * @return An area covering the space between the [first] and [second] coordinate.
+ */
+fun areaOf(first: Coordinate2D, second: Coordinate2D): RangeArea = RangeArea(
+    minOf(first.x, second.x)..maxOf(first.x, second.x),
+    minOf(first.y, second.y)..maxOf(first.y, second.y)
+)
+
+/**
  * Returns a new area that is evenly scaled by the [amount]. The area is shrunk or expanded by the [amount] in
  * each direction. A negative [amount] will shrink the area. The [x][RangeArea.x] and [y][RangeArea.y] dimensions
  * of the resulting area will be increased or decreased by double the [amount].

@@ -34,6 +34,13 @@ class RangeAreaKtTest {
             .isEqualTo(RangeArea(10..10, 20..20))
     }
 
+    @ParameterizedTest
+    @MethodSource("cornersForAreaOf")
+    fun `areaOf with coordinates`(first: Coordinate2D, second: Coordinate2D) {
+        assertThat(areaOf(first, second))
+            .isEqualTo(RangeArea(10..15, 20..25))
+    }
+
     @Test
     fun `scale when amount is positive then result is larger`() {
         val rangeArea = RangeArea(10..10, 20..20)
@@ -82,6 +89,14 @@ class RangeAreaKtTest {
 
     companion object {
         val rangeAreaForCoerceIn = RangeArea(0..10, 10..20)
+
+        @JvmStatic
+        fun cornersForAreaOf() = arrayOf(
+            Arguments.of(coordinateOf(10, 20), coordinateOf(15, 25)),
+            Arguments.of(coordinateOf(15, 25), coordinateOf(10, 20)),
+            Arguments.of(coordinateOf(10, 25), coordinateOf(15, 20)),
+            Arguments.of(coordinateOf(15, 20), coordinateOf(10, 25))
+        )
 
         @JvmStatic
         fun areasForCoerceIn() = arrayOf(
