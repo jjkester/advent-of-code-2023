@@ -25,3 +25,5 @@ fun coordinateOf(x: Int, y: Int): Coordinate2D = Coordinate2D(x, y)
  * [y][Coordinate2D.y] coordinate.
  */
 infix fun Int.by(other: Int): Coordinate2D = Coordinate2D(this, other)
+
+operator fun Coordinate2D.plus(vector: Vector2D): Coordinate2D = Coordinate2D(x + vector.x, y + vector.y)

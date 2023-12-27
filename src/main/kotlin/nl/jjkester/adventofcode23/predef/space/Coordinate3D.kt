@@ -27,3 +27,6 @@ fun coordinateOf(x: Int, y: Int, z: Int): Coordinate3D = Coordinate3D(x, y, z)
  * the [other] value as [z][Coordinate3D.z] coordinate.
  */
 infix fun Coordinate2D.by(other: Int): Coordinate3D = Coordinate3D(this.x, this.y, other)
+
+operator fun Coordinate3D.plus(vector: Vector3D): Coordinate3D =
+    Coordinate3D(x + vector.x, y + vector.y, z + vector.z)
